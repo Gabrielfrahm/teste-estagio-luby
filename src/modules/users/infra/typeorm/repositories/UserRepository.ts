@@ -30,6 +30,10 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
+  public async delete(email: string): Promise<void> {
+    await this.ormRepository.delete({ email });
+  }
+
   public async save(user: User): Promise<User> {
     return this.ormRepository.save(user);
   }

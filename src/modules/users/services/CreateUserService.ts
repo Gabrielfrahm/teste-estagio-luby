@@ -7,7 +7,6 @@ interface IRequestDTO {
   name: string;
   email: string;
   location: string;
-  avatar: string;
   username: string;
   bio: string;
 }
@@ -23,7 +22,6 @@ class CreateUserService {
     name,
     email,
     location,
-    avatar,
     username,
     bio,
   }: IRequestDTO): Promise<User | undefined> {
@@ -37,7 +35,6 @@ class CreateUserService {
       name,
       email,
       location,
-      avatar,
       username,
       bio,
     });
