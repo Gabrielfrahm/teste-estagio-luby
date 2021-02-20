@@ -11,6 +11,9 @@ import TokenRepository from '@modules/users/infra/typeorm/repositories/TokenRepo
 import IFollowerRepository from '@modules/followers/repositories/IFollowerRepository';
 import FollowerRepository from '@modules/followers/infra/typeorm/repositories/FollowerRespository';
 
+import IFollowingRepository from '@modules/followings/repositories/IFollowingRepository';
+import FollowingRepository from '@modules/followings/infra/typeorm/repositories/FollowingRepository';
+
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 
 container.registerSingleton<ITokenRepository>(
@@ -21,4 +24,9 @@ container.registerSingleton<ITokenRepository>(
 container.registerSingleton<IFollowerRepository>(
   'FollowerRepository',
   FollowerRepository,
+);
+
+container.registerSingleton<IFollowingRepository>(
+  'FollowingRepository',
+  FollowingRepository,
 );

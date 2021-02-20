@@ -5,11 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateFollower1613727993081 implements MigrationInterface {
+export default class CreateFollowing1613823948014
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'followers',
+        name: 'followings',
         columns: [
           {
             name: 'id',
@@ -24,7 +25,7 @@ export default class CreateFollower1613727993081 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'follower_id',
+            name: 'following_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -41,9 +42,9 @@ export default class CreateFollower1613727993081 implements MigrationInterface {
         ],
       }),
     );
-    await queryRunner.createForeignKeys('followers', [
+    await queryRunner.createForeignKeys('followings', [
       new TableForeignKey({
-        name: 'UserFollower',
+        name: 'UserFollowing',
         columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
@@ -51,8 +52,8 @@ export default class CreateFollower1613727993081 implements MigrationInterface {
         onUpdate: 'CASCADE',
       }),
       new TableForeignKey({
-        name: 'FollowerUser',
-        columnNames: ['follower_id'],
+        name: 'FollowingUser',
+        columnNames: ['following_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
         onDelete: 'CASCADE',
@@ -62,7 +63,7 @@ export default class CreateFollower1613727993081 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('followers');
-    await queryRunner.dropForeignKeys('followers', []);
+    await queryRunner.dropTable('followings');
+    await queryRunner.dropForeignKeys('followings', []);
   }
 }

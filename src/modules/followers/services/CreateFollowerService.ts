@@ -39,6 +39,10 @@ class CreateFollowerService {
       throw new AppError('relationship already exists');
     }
 
+    if (user_id === follower_id) {
+      throw new AppError("you can't follow yourself");
+    }
+
     const createFollower = await this.followerRepository.create({
       follower_id,
       user_id,

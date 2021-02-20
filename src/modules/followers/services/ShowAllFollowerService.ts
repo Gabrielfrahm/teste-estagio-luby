@@ -7,6 +7,11 @@ interface IRequestDTO {
   user_id: string;
 }
 
+interface IResponseDTO {
+  follower: Follower[];
+  count: number;
+}
+
 @injectable()
 class ShowAllFollowerService {
   constructor(
@@ -14,14 +19,20 @@ class ShowAllFollowerService {
     private followerRepository: IFollowerRepository,
   ) {}
 
-  public async execute({ user_id }: IRequestDTO): Promise<Follower[]> {
+  public async execute({ user_id }: IRequestDTO): Promise<IResponseDTO> {
     const follower = await this.followerRepository.findFollowers(user_id);
 
     if (!follower) {
       throw new AppError('no followers found');
     }
 
-    return follower;
+    const count = await this.followerRepository.count(user_id);
+
+    if (!count) {
+      throw new AppError('not count followers');
+    }
+
+    return { follower, count };
   }
 }
 

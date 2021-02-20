@@ -40,29 +40,6 @@ class FollowerRepository implements IFollowerRepository {
     return followers;
   }
 
-  // public async findFollowerByUserId(
-  //   user_id: string,
-  // ): Promise<Follower[] | undefined> {
-  //   const followers = await this.ormRepository.find({
-  //     where: {
-  //       user_id,
-  //     },
-  //     relations: ['follower'],
-  //   });
-
-  //   const filter = {
-  //     data: followers.map(follower => ({
-  //       id: follower.id,
-  //       user_id: follower.user_id,
-  //       follower_id: follower.follower_id,
-  //     })),
-
-  //     count: followers,
-  //   };
-
-  //   return filter.count;
-  // }
-
   public async create(data: ICreateFollowerDTO): Promise<Follower> {
     const follower = this.ormRepository.create(data);
 
@@ -77,6 +54,14 @@ class FollowerRepository implements IFollowerRepository {
 
   public async save(follower: Follower): Promise<Follower> {
     return this.ormRepository.save(follower);
+  }
+
+  public async count(user_id: string): Promise<number | undefined> {
+    const number = await this.ormRepository.count({
+      where: { user_id },
+    });
+
+    return number;
   }
 }
 
