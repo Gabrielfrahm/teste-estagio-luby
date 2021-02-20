@@ -50,7 +50,10 @@ export default class UsersController {
     return response.json(user);
   }
 
-  public async delete(request: Request, response: Response): Promise<Response> {
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
     const email = request.body;
 
     const deleteUserService = container.resolve(DeleteUserService);

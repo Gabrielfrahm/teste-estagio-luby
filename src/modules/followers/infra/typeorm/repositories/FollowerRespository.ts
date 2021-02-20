@@ -29,35 +29,39 @@ class FollowerRepository implements IFollowerRepository {
     return follower;
   }
 
-  public async findFollowers(): Promise<Follower[] | undefined> {
-    const followers = await this.ormRepository.find();
-
-    return followers;
-  }
-
-  public async findFollowerByUserId(
-    user_id: string,
-  ): Promise<Follower[] | undefined> {
-    const followers = await this.ormRepository.findAndCount({
+  public async findFollowers(user_id: string): Promise<Follower[] | undefined> {
+    const followers = await this.ormRepository.find({
       where: {
         user_id,
       },
       relations: ['follower'],
     });
 
-    // const filter = {
-    //   data: followers[0].map(follower => ({
-    //     id: follower.id,
-    //     user_id: follower.user_id,
-    //     follower_id: follower.follower_id,
-    //     follower_data: follower.follower,
-    //   })),
-
-    //   count: followers,
-    // };
-
-    return followers[0];
+    return followers;
   }
+
+  // public async findFollowerByUserId(
+  //   user_id: string,
+  // ): Promise<Follower[] | undefined> {
+  //   const followers = await this.ormRepository.find({
+  //     where: {
+  //       user_id,
+  //     },
+  //     relations: ['follower'],
+  //   });
+
+  //   const filter = {
+  //     data: followers.map(follower => ({
+  //       id: follower.id,
+  //       user_id: follower.user_id,
+  //       follower_id: follower.follower_id,
+  //     })),
+
+  //     count: followers,
+  //   };
+
+  //   return filter.count;
+  // }
 
   public async create(data: ICreateFollowerDTO): Promise<Follower> {
     const follower = this.ormRepository.create(data);

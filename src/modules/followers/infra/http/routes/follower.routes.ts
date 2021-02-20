@@ -8,7 +8,7 @@ const FollowerRouter = Router();
 
 const followerController = new FollowerController();
 
-// UsersRouter.get('/', ensureAuthenticated, followerController.index);
+FollowerRouter.get('/:id', ensureAuthenticated, followerController.index);
 
 FollowerRouter.post(
   '/',
@@ -22,21 +22,17 @@ FollowerRouter.post(
   followerController.create,
 );
 
-// UsersRouter.put(
-//   '/',
-//   celebrate({
-//     [Segments.BODY]: {
-//       name: Joi.string().required(),
-//       email: Joi.string().required(),
-//       location: Joi.string().required(),
-//       username: Joi.string().required(),
-//       bio: Joi.string().required(),
-//     },
-//   }),
-//   ensureAuthenticated,
-//   usersController.update,
-// );
+FollowerRouter.put(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      follower_id: Joi.string().required(),
+    },
+  }),
+  ensureAuthenticated,
+  followerController.update,
+);
 
-// UsersRouter.delete('/', ensureAuthenticated, usersController.delete);
+FollowerRouter.delete('/:id', ensureAuthenticated, followerController.destroy);
 
 export default FollowerRouter;

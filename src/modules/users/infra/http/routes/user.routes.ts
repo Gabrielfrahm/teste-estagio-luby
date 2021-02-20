@@ -52,6 +52,6 @@ UsersRouter.put(
   usersController.update,
 );
 
-UsersRouter.delete('/', ensureAuthenticated, usersController.delete);
+UsersRouter.delete('/', ensureAuthenticated, usersController.destroy);
 
 export default UsersRouter;
