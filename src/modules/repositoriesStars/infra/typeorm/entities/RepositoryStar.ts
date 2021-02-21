@@ -1,3 +1,4 @@
+import Repository from '@modules/repositories/infra/typeorm/entities/Repository';
 import User from '@modules/users/infra/typeorm/entities/User';
 import {
   Column,
@@ -9,8 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('followings')
-class Following {
+@Entity('repositories_stars')
+class RepositoryStar {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,11 +23,11 @@ class Following {
   user: User;
 
   @Column()
-  following_id: string;
+  repository_id: string;
 
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'following_id' })
-  following: User;
+  @ManyToOne(() => Repository)
+  @JoinColumn({ name: 'repository_id' })
+  repository: Repository;
 
   @CreateDateColumn()
   created_at: Date;
@@ -35,4 +36,4 @@ class Following {
   updated_at: Date;
 }
 
-export default Following;
+export default RepositoryStar;

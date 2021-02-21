@@ -31,6 +31,12 @@ class CreateUserService {
       throw new AppError('User Already existing');
     }
 
+    const checkUsername = await this.userRepository.findByUsername(username);
+
+    if (checkUsername) {
+      throw new AppError('username already existis');
+    }
+
     const user = await this.userRepository.create({
       name,
       email,
