@@ -1,5 +1,5 @@
 import { Router } from 'express';
-// import { celebrate, Segments, Joi } from 'celebrate';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '@modules/users/infra/http/middleware/ensureAuthenticated';
 import RepositoriesStarsController from '../controller/RepositoriesStarsController';
@@ -16,6 +16,11 @@ RepositoryStarRouter.get(
 
 RepositoryStarRouter.post(
   '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      repository_id: Joi.string().required(),
+    },
+  }),
   ensureAuthenticated,
 
   repositoriesStarsController.create,
@@ -23,7 +28,12 @@ RepositoryStarRouter.post(
 
 RepositoryStarRouter.put(
   '/:id',
-
+  celebrate({
+    [Segments.BODY]: {
+      repository_id: Joi.string().required(),
+      user_id: Joi.string().required(),
+    },
+  }),
   ensureAuthenticated,
   repositoriesStarsController.update,
 );
