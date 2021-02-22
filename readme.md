@@ -31,15 +31,22 @@ $ yarn dev:server
 
 # O servidor inciará na porta:3333 - acesse <http://localhost:3333>
 ```
-
+### 🎲 Rodando o Back End (build)
 ```bash
 # Caso queira rodar o Build
 $ yarn build
 
 # Ira gerar o código JS na pasta dist
-
 # Mude as config do arquivo ormconfig.json apontando para a pasta dist e arquivos JS
-
+$ "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/migrations/*.ts"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
 
 # Execute a aplicação em modo de build
 $ node dist/shared/infra/http/server.js
