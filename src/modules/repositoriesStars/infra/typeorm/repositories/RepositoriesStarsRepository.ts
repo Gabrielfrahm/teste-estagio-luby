@@ -13,13 +13,22 @@ class RepositoriesStarsRepository implements IRepositoriesStarsRepository {
   public async findById(
     repositories_stars_id: string,
   ): Promise<RepositoryStar | undefined> {
-    const user = this.ormRepository.findOne({
+    const star = this.ormRepository.findOne({
       where: {
         repository_id: repositories_stars_id,
       },
+      relations: ['repository'],
     });
 
-    return user;
+    return star;
+  }
+
+  public async findByRepoId(
+    repositories_stars_id: string,
+  ): Promise<RepositoryStar | undefined> {
+    const star = this.ormRepository.findOne(repositories_stars_id);
+
+    return star;
   }
 
   public async findRepoStar({

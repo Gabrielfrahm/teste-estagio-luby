@@ -3,6 +3,9 @@ import RepositoryStar from '../infra/typeorm/entities/RepositoryStar';
 
 export default interface IRepositoriesStarsRepository {
   findById(repositories_stars_id: string): Promise<RepositoryStar | undefined>;
+  findByRepoId(
+    repositories_stars_id: string,
+  ): Promise<RepositoryStar | undefined>;
   findRepoStar(
     data: ICreateRepositoriesStarsDTO,
   ): Promise<RepositoryStar | undefined>;

@@ -6,7 +6,7 @@ interface IRequestDTO {
 }
 
 @injectable()
-class CreateRepositoryService {
+class DeleteRepositoriesStars {
   constructor(
     @inject('RepositoriesStarsRepository')
     private repositoriesStarsRepository: IRepositoriesStarsRepository,
@@ -17,4 +17,4 @@ class CreateRepositoryService {
   }
 }
 
-export default CreateRepositoryService;
+export default DeleteRepositoriesStars;

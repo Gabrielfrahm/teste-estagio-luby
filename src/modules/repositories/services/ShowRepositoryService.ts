@@ -11,6 +11,7 @@ interface IRequestDTO {
 
 interface IResponseDTO {
   repositories: Repository[];
+  // repo: number;
   count: number;
 }
 

@@ -15,7 +15,7 @@ interface IResponseDTO {
 }
 
 @injectable()
-class CreateRepositoryService {
+class ShowRepositoriesStarsService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
@@ -48,4 +48,4 @@ class CreateRepositoryService {
   }
 }
 
-export default CreateRepositoryService;
+export default ShowRepositoriesStarsService;

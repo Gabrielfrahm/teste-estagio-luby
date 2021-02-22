@@ -1,7 +1,7 @@
-import CreateRepositoriesStars from '@modules/repositoriesStars/services/CreateRepositoriesStars';
-import ShowRepositoriesStars from '@modules/repositoriesStars/services/ShowRepositoriesStars';
-import DeleteRepositoriesStars from '@modules/repositoriesStars/services/DeleteRepositoriesStars';
-// import UpdateRepositoryService from '@modules/repositories/services/UpdateRepositoryService';
+import CreateRepositoriesStarsService from '@modules/repositoriesStars/services/CreateRepositoriesStarsService';
+import ShowRepositoriesStarsService from '@modules/repositoriesStars/services/ShowRepositoriesStarsService';
+import DeleteRepositoriesStarsService from '@modules/repositoriesStars/services/DeleteRepositoriesStarsService';
+import UpdateRepositoriesStarsService from '@modules/repositoriesStars/services/UpdateRepositoriesStarsService';
 
 import { Response, Request } from 'express';
 import { container } from 'tsyringe';
@@ -14,7 +14,7 @@ export default class FollowerController {
       const { repository_id } = request.body;
 
       const createRepositoriesStars = container.resolve(
-        CreateRepositoriesStars,
+        CreateRepositoriesStarsService,
       );
 
       const stars = await createRepositoriesStars.execute({
@@ -32,7 +32,9 @@ export default class FollowerController {
     try {
       const repository_id = request.params.id;
 
-      const showRepositoriesStars = container.resolve(ShowRepositoriesStars);
+      const showRepositoriesStars = container.resolve(
+        ShowRepositoriesStarsService,
+      );
 
       const repository = await showRepositoriesStars.execute({
         repository_id,
@@ -52,7 +54,7 @@ export default class FollowerController {
       const repository_id = request.params.id;
 
       const deleteRepositoriesStars = container.resolve(
-        DeleteRepositoriesStars,
+        DeleteRepositoriesStarsService,
       );
 
       await deleteRepositoriesStars.execute({
@@ -65,25 +67,24 @@ export default class FollowerController {
     }
   }
 
-  // public async update(request: Request, response: Response): Promise<Response> {
-  //   try {
-  //     const repository_id = request.params.id;
-  //     const { name, description, open } = request.body;
+  public async update(request: Request, response: Response): Promise<Response> {
+    try {
+      const repositories_stars_id = request.params.id;
+      const { user_id, repository_id } = request.body;
 
-  //     const updateRepositoryService = container.resolve(
-  //       UpdateRepositoryService,
-  //     );
+      const updateRepositoryStarService = container.resolve(
+        UpdateRepositoriesStarsService,
+      );
 
-  //     const repository = await updateRepositoryService.execute({
-  //       repository_id,
-  //       name,
-  //       description,
-  //       open,
-  //     });
+      const repositoriesStars = await updateRepositoryStarService.execute({
+        repository_id,
+        repositories_stars_id,
+        user_id,
+      });
 
-  //     return response.status(201).json(repository);
-  //   } catch (err) {
-  //     throw new AppError(err);
-  //   }
-  // }
+      return response.status(201).json(repositoriesStars);
+    } catch (err) {
+      throw new AppError(err);
+    }
+  }
 }

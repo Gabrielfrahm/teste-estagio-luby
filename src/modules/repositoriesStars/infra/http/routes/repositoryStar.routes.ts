@@ -21,12 +21,12 @@ RepositoryStarRouter.post(
   repositoriesStarsController.create,
 );
 
-// RepositoryRouter.put(
-//   '/:id',
+RepositoryStarRouter.put(
+  '/:id',
 
-//   ensureAuthenticated,
-//   repositoryController.update,
-// );
+  ensureAuthenticated,
+  repositoriesStarsController.update,
+);
 
 RepositoryStarRouter.delete(
   '/:id',
