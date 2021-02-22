@@ -17,7 +17,6 @@ class RepositoriesStarsRepository implements IRepositoriesStarsRepository {
       where: {
         repository_id: repositories_stars_id,
       },
-      relations: ['repository'],
     });
 
     return star;
