@@ -39,13 +39,13 @@ $ yarn build
 # Ira gerar o código JS na pasta dist
 # Mude as config do arquivo ormconfig.json apontando para a pasta dist e arquivos JS
 $ "entities": [
-      "./src/modules/**/infra/typeorm/entities/*.ts"
+      "./dist/modules/**/infra/typeorm/entities/*.js"
     ],
     "migrations": [
-      "./src/shared/infra/typeorm/migrations/*.ts"
+      "./dist/shared/infra/typeorm/migrations/*.js"
     ],
     "cli": {
-      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+      "migrationsDir": "./dist/shared/infra/typeorm/migrations"
   }
 
 # Execute a aplicação em modo de build
