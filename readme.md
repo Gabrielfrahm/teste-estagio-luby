@@ -10,6 +10,8 @@
 
 <hr>
 <p id="pre">
+caro avaliador, na tabela repository não fui capas de usar a palavra public como um campo, pois essa palavra é restrita a classes do typescript, entao substitui pela palavra open !
+  
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
